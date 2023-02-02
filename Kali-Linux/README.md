@@ -29,3 +29,6 @@ In the Linux/Unix operating system files are stored in a tree-like structure sta
 |**/sbin**|Binary executable programs for an administrator.|
 |**/srv**|It contains server-specific and server-related files.|
 |**/sys**|It is a virtual filesystem for modern Linux distributions to store and allows modification of the devices connected to the system.|
+
+
+
