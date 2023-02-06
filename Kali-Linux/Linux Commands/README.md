@@ -130,3 +130,6 @@ Advanced permissions replace the **x** when using `ls -l`. Lower case if **x** i
 |           | `user filename`          | Change owner (*User*)                             |
 |           | `:group filename`        | Change owner (*Group*)                            |
 | `chgroup` | `group filename`         | Change owner (*Group*)                            |
+
+
+**_by wasny0ps_**
