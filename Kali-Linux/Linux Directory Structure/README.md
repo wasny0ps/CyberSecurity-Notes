@@ -32,4 +32,4 @@ In the Linux/Unix operating system files are stored in a tree-like structure sta
 |**/sys**|It is a virtual filesystem for modern Linux distributions to store and allows modification of the devices connected to the system.|
 
 
-
+**_by wasny0ps_**
