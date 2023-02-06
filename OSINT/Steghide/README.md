@@ -10,4 +10,14 @@ Features include the compression  of the embedded data, encryption of the embedd
 
 You can embed the data with the `steghide embed -cf embedding.jpg -ef data.txt` command.
 
-<img src="">
+<img width="350" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/OSINT/Steghide/source/embed.png">
+
+
+## Extract Data
+
+You can extract the data from  file with the `steghide extract -sf embedding.jpg` command.
+
+<img width="350" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/OSINT/Steghide/source/extract.png">
+
+
+**_by wasny0ps_**
