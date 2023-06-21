@@ -1,5 +1,7 @@
 # Switch Security Steps
 
+Before enter the aspects detailly, let's sum up titles about switch security and explain them shortly. Here is a full list of switch security to do:
+
 - **Access Control:** Limiting access to switches is a fundamental security measure. It involves setting up strong passwords or using authentication methods like RADIUS (Remote Authentication Dial-In User Service) or TACACS+ (Terminal Access Controller Access Control System Plus) to control who can access and configure the switch.
 - **VLAN Segmentation:** Virtual LAN (VLAN) segmentation involves dividing a network into smaller logical segments, each isolated from others. This helps restrict the communication between devices in different VLANs, minimizing the potential for unauthorized access and lateral movement of threats.
 - **Port Security:** Implementing port security features allows administrators to control which devices are allowed to connect to switch ports. Techniques like MAC address filtering, limiting the number of MAC addresses per port, and using sticky MAC addresses help prevent unauthorized devices from gaining access to the network.
