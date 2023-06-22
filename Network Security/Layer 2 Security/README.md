@@ -109,7 +109,7 @@ Different techniques are used to deal with each type of VLAN hopping attack. To 
 
 Here is my topology. In this configuration, we will set the switch port mode as access and disable DTP with `switchport nonegotiate`command for stop the switch spoofing attack.
 
-<p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/switch_spoofing_prevention_topology.png"></p>
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/switch_spoofing_prevention_topology.png"></p>
 
 ```
 Switch(config)#interface range fastEthernet 0/1-2
@@ -123,7 +123,7 @@ Switch(config-if-range)#switchport nonegotiate
 ```
 At the end of the configuration, you can go over DTP protocol usage in the network.
 ```
-Switch#sh dtp 
+Switch#show dtp 
 Global DTP information
     Sending DTP Hello packets every 30 seconds
     Dynamic Trunk timeout is 300 seconds
@@ -136,6 +136,9 @@ VLAN double tagging exploits 802.1Q tagging, taking advantage of the fact that s
 ### Double Tagging Prevention
 
 Double tagging can be **prevented using a three-step process**. First, avoid **putting any hosts on the default VLAN (VLAN 1)**. Second, **be sure that the native VLAN on every trunk port is an unused VLAN ID**. Finally, **enable explicit tagging of the native VLAN for all trunk ports**.
+
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/double_tagging_prevention_topology.png"></p>
+
 
 # Dynamic ARP Inspection
 
