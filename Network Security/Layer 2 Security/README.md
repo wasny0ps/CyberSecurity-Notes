@@ -105,9 +105,9 @@ With a switch spoofing method, an attacker imitates a trunking switch by using t
 
 ### Switch Spoofing Prevention
 
-Different techniques are used to deal with each type of VLAN hopping attack. To prevent switch spoofing, disable Dynamic Trunking Protocol to ensure that ports will not automatically negotiate trunks. You should also make certain that any port that is not intended to be a trunk is explicitly set up to be an access port.
+Different techniques are used to deal with each type of VLAN hopping attack. To prevent switch spoofing, **disable Dynamic Trunking Protocol** to ensure that ports will not automatically negotiate trunks. You should also **make certain that any port that is not intended to be a trunk is explicitly set up to be an access port**.
 
-Here is my topology. In this configuration, we will set the switch port mode as access and disable DTP with `switchport nonegotiate``command for stop the switch spoofing attack.
+Here is my topology. In this configuration, we will set the switch port mode as access and disable DTP with `switchport nonegotiate`command for stop the switch spoofing attack.
 
 <p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/switch_spoofing_prevention_topology.png"></p>
 
@@ -121,14 +121,21 @@ Switch(config)#interface range fastEthernet 0/3-4
 Switch(config-if-range)#switchport mode access
 Switch(config-if-range)#switchport nonegotiate
 ```
-
+At the end of the configuration, you can go over DTP protocol usage in the network.
+```
+Switch#sh dtp 
+Global DTP information
+    Sending DTP Hello packets every 30 seconds
+    Dynamic Trunk timeout is 300 seconds
+    0 interfaces using DTP
+```
 ### Double Tagging
 
-VLAN double tagging exploits 802.1Q tagging, taking advantage of the fact that some switches only remove one 802.1Q tag. In a double tagging attack, the hacker appends two VLAN tags rather than the usual one. The outer tag (which belongs to the attack’s own VLAN) is removed, leaving the inner tag of the victim’s VLAN to be forwarded to the trunk link. When the switch encounters the packet, it sees the second tag and allows the hacker access to the victim’s VLAN.
+VLAN double tagging exploits 802.1Q tagging, taking advantage of the fact that some switches only remove one 802.1Q tag. In a double tagging attack, **the hacker appends two VLAN tags rather than the usual one**. The outer tag (which belongs to the attack’s own VLAN) is removed, leaving the inner tag of the victim’s VLAN or default native VLAN to be forwarded to the trunk link. When the switch encounters the packet, it sees the second tag and allows the hacker access to the victim’s VLAN.
 
 ### Double Tagging Prevention
 
-Double tagging can be prevented using a three-step process. First, avoid putting any hosts on the default VLAN (VLAN 1). Second, be sure that the native VLAN on every trunk port is an unused VLAN ID. Finally, enable explicit tagging of the native VLAN for all trunk ports.
+Double tagging can be **prevented using a three-step process**. First, avoid **putting any hosts on the default VLAN (VLAN 1)**. Second, **be sure that the native VLAN on every trunk port is an unused VLAN ID**. Finally, **enable explicit tagging of the native VLAN for all trunk ports**.
 
 # Dynamic ARP Inspection
 
