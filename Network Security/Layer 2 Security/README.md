@@ -159,14 +159,22 @@ Switch(config-if-range)#spanning-tree bpduguard enable
 
 Dynamic ARP Inspection (DAI) is a security feature that **validates Address Resolution Protocol (ARP) packets in a network**. DAI allows a network administrator to intercept, log, and discard ARP packets with invalid MAC address to IP address bindings. This capability **protects the network from certain “man-in-the-middle” attacks**.
 
+## ARP
+
+ARP stands for Address Resolution Protocol. It is a communication protocol that is one of the important network layer protocols in the OSI model and is used to determine a device’s Media Access Control (MAC) address based on its Internet Protocol (IP) address in order to communicate with other devices on the network.
+
+<p><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/IP_packet.png"></p>
+
+With the ARP protocol, an **arp request** is sent to all devices including the target device, but only the target device responds to this request. **As a result of the response to the request, the MAC addresses of the target IPs are learned**. Learned MAC addresses are kept in a table in the devices's storage.
+
+<p><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_command.png"></p>
+
 ## ARP Cache Poisoning
 
-You can attack hosts, switches, and routers connected to your Layer 2 network by “poisoning” their ARP caches. For example, a malicious user might intercept traffic intended for other hosts on the subnet by poisoning the ARP caches of systems connected to the subnet.
-
-Consider the following configuration:
-
-<p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/ARP_cache_poisoning.png"></p>
-
-Hosts HA, HB, and HC are connected to the switch on interfaces A, B and C, all of which are on the same subnet. Their IP and MAC addresses are shown in parentheses; for example, Host HA uses IP address IA and MAC address MA. When HA needs to communicate to HB at the IP Layer, HA broadcasts an ARP request for the MAC address associated with IB. As soon as HB receives the ARP request, the ARP cache on HB is populated with an ARP binding for a host with the IP address IA and a MAC address MA; for example, IP address IA is bound to MAC address MA. When HB responds, the ARP cache on HA is populated with a binding for a host with the IP address IB and a MAC address MB.
-
-Host HC can “poison” the ARP caches of HA and HB by broadcasting forged ARP responses with bindings for a host with an IP address of IA (or IB) and a MAC address of MC. Hosts with poisoned ARP caches use the MAC address MC as the destination MAC address for traffic intended for IA or IB. This means that HC intercepts that traffic. Because HC knows the true MAC addresses associated with IA and IB, HC can forward the intercepted traffic to those hosts using the correct MAC address as the destination. HC has inserted itself into the traffic stream from HA to HB, the classic “man in the middle” attack.
+Communication in computer networks takes place using different protocols. in different networks
+When using IP addresses when communication is desired, communication in local area networks (LAN), MAC addresses
+provided using. Address Resolution while providing MAC address-based communication in local area networks
+Protocol (ARP) is used.
+Thanks to the ARP protocol, which is used to learn the MAC addresses of devices with known IP addresses, OSI model 2.
+layer can be communicated. In a data packet arriving at the switching device in local area networks
+the destination IP address is present but the destination MAC address is unknown
