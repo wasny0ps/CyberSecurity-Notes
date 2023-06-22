@@ -58,7 +58,8 @@ There are two options to prevent a DHCP snooping attack. The first alternative i
 
 Here is my vulnerable topology that we prevent it. 
 
-<p><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/DHCP_snooping_prevention_topology.png"/></p>
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/dhcp_snooping_prevention_topology.png"/></p>
+
 
 
 # VLAN Security
