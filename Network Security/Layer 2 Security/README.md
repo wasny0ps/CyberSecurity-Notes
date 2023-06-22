@@ -62,7 +62,7 @@ Here is my vulnerable topology that we prevent it.
 
 Let's try to get IP from local DHCP server.
 
-<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/dhcp_snooping.png"/></p>
+<p align="center"><img height="200" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/dhcp_snooping.png"/></p>
 
 The photo clearly shows that developer's pc didn't get IP from company's DHCP server. To block DHCP snooping attack, we can execute this command in our switch's CLI.
 
@@ -73,7 +73,7 @@ Switch(config-if)#ip dhcp snooping trust
 ```
 Again, make a request from DHCP server.
 
-<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/dhcp_snooping_prevention.png"/></p>
+<p align="center"><img height="200" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/dhcp_snooping_prevention.png"/></p>
 
 And we cut off snooping attack. Our local DHCP server works correctly. Finally, you can check your interfaces for DHCP snooping prevention.
 
@@ -93,5 +93,28 @@ FastEthernet0/2            yes        unlimited
 ```
 
 # VLAN Security
+When devices are separated into multiple VLANs—often by department—it’s easier to prevent a compromised computer from infecting the entire network. Nevertheless, VLANs do come with some unique security risks that MSPs must keep in mind. The most important risk to consider is VLAN hopping.
+
+## VLAN Hopping
+
+In a VLAN hopping attack, a hacker connected to one VLAN gains access to other VLANs that they do not have permission to enter. In a secure VLAN, each computer is connected to one switch access port. Each computer can only send traffic to their specific connected port by accessing a single VLAN. However, with VLAN hopping, an attacker is able to send packets to ports that are not normally accessible, penetrating other VLANs. VLAN hopping can be accomplished in one of two ways:
+
+### Switch Spoofing
+
+With a switch spoofing method, an attacker imitates a trunking switch by using the **VLAN’s tagging and trunking protocol** (Multiple VLAN Registration Protocol, IEEE 802.1Q, or Dynamic Trunking Protocol). By forming a trunk link, the hacker can gain access to traffic from all of the VLANs.
+
+### Switch Spoofing Prevention
+
+Different techniques are used to deal with each type of VLAN hopping attack. To prevent switch spoofing, disable Dynamic Trunking Protocol to ensure that ports will not automatically negotiate trunks. You should also make certain that any port that is not intended to be a trunk is explicitly set up to be an access port.
+
+### Double Tagging
+
+VLAN double tagging exploits 802.1Q tagging, taking advantage of the fact that some switches only remove one 802.1Q tag. In a double tagging attack, the hacker appends two VLAN tags rather than the usual one. The outer tag (which belongs to the attack’s own VLAN) is removed, leaving the inner tag of the victim’s VLAN to be forwarded to the trunk link. When the switch encounters the packet, it sees the second tag and allows the hacker access to the victim’s VLAN.
+
+### Double Tagging Prevention
+
+Double tagging can be prevented using a three-step process. First, avoid putting any hosts on the default VLAN (VLAN 1). Second, be sure that the native VLAN on every trunk port is an unused VLAN ID. Finally, enable explicit tagging of the native VLAN for all trunk ports.
 
 # Dynamic ARP Inspection
+
+## ARP Cache Poisoning
