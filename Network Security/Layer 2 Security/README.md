@@ -60,7 +60,37 @@ Here is my vulnerable topology that we prevent it.
 
 <p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/dhcp_snooping_prevention_topology.png"/></p>
 
+Let's try to get IP from local DHCP server.
 
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/dhcp_snooping.png"/></p>
+
+The photo clearly shows that developer's pc didn't get IP from company's DHCP server. To block DHCP snooping attack, we can execute this command in our switch's CLI.
+
+```
+Switch(config)#ip dhcp snooping
+Switch(config)#int fa0/2
+Switch(config-if)#ip dhcp snooping trust
+```
+Again, make a request from DHCP server.
+
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/dhcp_snooping_prevention.png"/></p>
+
+And we cut off snooping attack. Our local DHCP server works correctly. Finally, you can check your interfaces for DHCP snooping prevention.
+
+```
+Switch#sh ip dhcp snooping 
+Switch DHCP snooping is enabled
+DHCP snooping is configured on following VLANs:
+none
+Insertion of option 82 is enabled
+Option 82 on untrusted port is not allowed
+Verification of hwaddr field is enabled
+Interface                  Trusted    Rate limit (pps)
+-----------------------    -------    ----------------
+FastEthernet0/1            no         unlimited       
+FastEthernet0/3            no         unlimited       
+FastEthernet0/2            yes        unlimited
+```
 
 # VLAN Security
 
