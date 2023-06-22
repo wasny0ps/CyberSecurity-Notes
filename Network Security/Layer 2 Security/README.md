@@ -135,11 +135,34 @@ VLAN double tagging exploits 802.1Q tagging, taking advantage of the fact that s
 
 ### Double Tagging Prevention
 
-Double tagging can be **prevented using a three-step process**. First, avoid **putting any hosts on the default VLAN (VLAN 1)**. Second, **be sure that the native VLAN on every trunk port is an unused VLAN ID**. Finally, **enable explicit tagging of the native VLAN for all trunk ports**.
+Double tagging can be **prevented using a three-step process**. First, avoid **putting any hosts on the default VLAN (VLAN 1)**. Second, **be sure that the native VLAN on every trunk port is an unused VLAN ID**. Finally, **enable explicit tagging of the native VLAN for all trunk ports**. Additionally, you must use **port security**, **configure allowed VLANs**, **enable BPDU Guard** for prevent double tagging attack. Here is my example topology.
 
 <p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/double_tagging_prevention_topology.png"></p>
 
+Configure allowed VLANs:
+```
+Switch(config)#int range fa0/1-2
+Switch(config-if-range)#switchport access vlan 20
+Switch(config-if-range)#ex
+Switch(config)#int range fa0/3-4
+Switch(config-if-range)#switchport access vlan 10
+```
 
-# Dynamic ARP Inspection
+Enable BPDU Guard:
+```
+Switch(config)#int range fastEthernet 0/1-4
+Switch(config-if-range)#spanning-tree bpduguard enable
+```
+
+
+# Overview of Dynamic ARP Inspection
+
+Dynamic ARP Inspection (DAI) is a security feature that **validates Address Resolution Protocol (ARP) packets in a network**. DAI allows a network administrator to intercept, log, and discard ARP packets with invalid MAC address to IP address bindings. This capability **protects the network from certain “man-in-the-middle” attacks**.
 
 ## ARP Cache Poisoning
+
+You can attack hosts, switches, and routers connected to your Layer 2 network by “poisoning” their ARP caches. For example, a malicious user might intercept traffic intended for other hosts on the subnet by poisoning the ARP caches of systems connected to the subnet.
+
+Consider the following configuration:
+
+<p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/ARP_cache_poisoning.png"></p>
