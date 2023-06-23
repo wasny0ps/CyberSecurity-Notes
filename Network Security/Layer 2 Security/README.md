@@ -159,13 +159,18 @@ Switch(config-if-range)#spanning-tree bpduguard enable
 
 ## ARP
 
-<p align="center"><img height="400" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/ARP.gif"></p>
+<p align="center"><img height="350" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/ARP.gif"></p>
 
 Sending IP packets on a multi-access network requires mapping an IP address to an Ethernet MAC address. Ethernet LANs use ARP to map MAC addresses to IP addresses. The switching device maintains this mapping in a cache that it consults when forwarding packets to network devices. If the ARP cache does not contain an entry for the destination device, the host (the DHCP client) broadcasts an ARP request for that device's address and stores the response in the cache.
 
+When we connect to a network, ARP requests are made continuously while communicating on the network. The returned answers are stored in the ARP table. We can see the ARP table of our computer with the ARP command on the terminal.
+
+<p align="center"><img height="350" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp.png"></p>
+
+
 ## ARP Poisoning (Spoofing)
 
-<p align="center"><img height="400" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_spoofing.gif"></p>
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_spoofing.gif"></p>
 
 
 ## Dynamic ARP Inspection
