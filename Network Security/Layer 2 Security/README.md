@@ -67,7 +67,7 @@ Let's try to get IP from local DHCP server.
 The photo clearly shows that developer's pc didn't get IP from company's DHCP server. To block DHCP snooping attack, we can execute this command in our switch's CLI.
 
 ```
-Switch(config)#ip dhcp snooping
+Switch(config)#ip dhcp snooping vlan 1
 Switch(config)#int fa0/2
 Switch(config-if)#ip dhcp snooping trust
 ```
@@ -157,24 +157,11 @@ Switch(config-if-range)#spanning-tree bpduguard enable
 
 # Overview of Dynamic ARP Inspection
 
-Dynamic ARP Inspection (DAI) is a security feature that **validates Address Resolution Protocol (ARP) packets in a network**. DAI allows a network administrator to intercept, log, and discard ARP packets with invalid MAC address to IP address bindings. This capability **protects the network from certain “man-in-the-middle” attacks**.
+Dynamic ARP Inspection (DAI) is a security feature that **validates Address Resolution Protocol (ARP) packets in a network**. DAI allows a network administrator to intercept, log, and discard ARP packets with invalid MAC address to IP address bindings. This capability **protects the network from certain “man-in-the-middle” and “ARP Poisoning” attacks**.
 
 ## ARP
 
-ARP stands for Address Resolution Protocol. It is a communication protocol that is one of the important network layer protocols in the OSI model and is used to determine a device’s Media Access Control (MAC) address based on its Internet Protocol (IP) address in order to communicate with other devices on the network.
+<p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/ARP.gif"></p>
 
-<p><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/IP_packet.png"></p>
+Sending IP packets on a multi-access network requires mapping an IP address to an Ethernet MAC address. Ethernet LANs use ARP to map MAC addresses to IP addresses. The switching device maintains this mapping in a cache that it consults when forwarding packets to network devices. If the ARP cache does not contain an entry for the destination device, the host (the DHCP client) broadcasts an ARP request for that device's address and stores the response in the cache.
 
-With the ARP protocol, an **arp request** is sent to all devices including the target device, but only the target device responds to this request. **As a result of the response to the request, the MAC addresses of the target IPs are learned**. Learned MAC addresses are kept in a table in the devices's storage.
-
-<p><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_command.png"></p>
-
-## ARP Cache Poisoning
-
-Communication in computer networks takes place using different protocols. in different networks
-When using IP addresses when communication is desired, communication in local area networks (LAN), MAC addresses
-provided using. Address Resolution while providing MAC address-based communication in local area networks
-Protocol (ARP) is used.
-Thanks to the ARP protocol, which is used to learn the MAC addresses of devices with known IP addresses, OSI model 2.
-layer can be communicated. In a data packet arriving at the switching device in local area networks
-the destination IP address is present but the destination MAC address is unknown
