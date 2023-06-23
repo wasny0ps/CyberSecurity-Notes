@@ -173,18 +173,22 @@ When we connect to a network, ARP packets are constantly sent to our computer. T
 
 When the content of the sent packet is looked at, it seems that the broadcast is broadcast because the MAC address is not known. This request is forwarded to all addresses within the scanning range.
 
-<p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_packet.png"></p>
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_packet.png"></p>
 
 If there is a device at the requested address, the device sends its MAC address to the address from which the request is made. In this way, the MAC address of the address is added to the ARP table. In the next request, communication can be provided without sending a broadcast to the network.
 
-<p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_reply_packet.png"></p>
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_reply_packet.png"></p>
 
+MAC addresses are uniquely identified as people's identification numbers. In a network we are connected to, we can easily learn the MAC addresses of other connected devices. When we first connect to the Internet, we constantly send packets to the network device that will direct us. These packets we send are routed according to the MAC address since we are on the same network.
 
 
 ## ARP Poisoning (Spoofing)
 
 <p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_spoofing.gif"></p>
 
+The purpose of the ARP poisoning attack is to capture the packet by imitating the same MAC address of the packet that goes according to the MAC address on the network. In this way, the packet that needs to go to the router is in the hands of the attacker. When the user looks at the ARP table at a time when there is no ARP poisoning, he will see that the MAC addresses are unique.
+
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_a.png"></p>
 
 ## Dynamic ARP Inspection
 
