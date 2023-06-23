@@ -93,7 +93,7 @@ FastEthernet0/2            yes        unlimited
 ```
 
 # VLAN Security
-When devices are separated into multiple VLANs—often by department—it’s easier to prevent a compromised computer from infecting the entire network. Nevertheless, VLANs do come with some unique security risks that MSPs must keep in mind. The most important risk to consider is VLAN hopping.
+When devices are separated into multiple VLANs, it’s easier to prevent a compromised computer from infecting the entire network. Nevertheless, VLANs do come with some unique security risks that MSPs must keep in mind. The most important risk to consider is VLAN hopping.
 
 ## VLAN Hopping
 
@@ -154,14 +154,20 @@ Switch(config)#int range fastEthernet 0/1-4
 Switch(config-if-range)#spanning-tree bpduguard enable
 ```
 
+# ARP Security
 
-# Overview of Dynamic ARP Inspection
-
-Dynamic ARP Inspection (DAI) is a security feature that **validates Address Resolution Protocol (ARP) packets in a network**. DAI allows a network administrator to intercept, log, and discard ARP packets with invalid MAC address to IP address bindings. This capability **protects the network from certain “man-in-the-middle” and “ARP Poisoning” attacks**.
 
 ## ARP
 
-<p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/ARP.gif"></p>
+<p align="center"><img height="400" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/ARP.gif"></p>
 
 Sending IP packets on a multi-access network requires mapping an IP address to an Ethernet MAC address. Ethernet LANs use ARP to map MAC addresses to IP addresses. The switching device maintains this mapping in a cache that it consults when forwarding packets to network devices. If the ARP cache does not contain an entry for the destination device, the host (the DHCP client) broadcasts an ARP request for that device's address and stores the response in the cache.
 
+## ARP Poisoning (Spoofing)
+
+<p align="center"><img height="400" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_spoofing.gif"></p>
+
+
+## Dynamic ARP Inspection
+
+Dynamic ARP Inspection (DAI) is a security feature that **validates Address Resolution Protocol (ARP) packets in a network**. DAI allows a network administrator to intercept, log, and discard ARP packets with invalid MAC address to IP address bindings. This capability **protects the network from certain “man-in-the-middle” and “ARP Poisoning” attacks**.
