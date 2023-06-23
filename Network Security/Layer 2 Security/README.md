@@ -161,11 +161,15 @@ Switch(config-if-range)#spanning-tree bpduguard enable
 
 <p align="center"><img height="350" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/ARP.gif"></p>
 
-Sending IP packets on a multi-access network requires mapping an IP address to an Ethernet MAC address. Ethernet LANs use ARP to map MAC addresses to IP addresses. The switching device maintains this mapping in a cache that it consults when forwarding packets to network devices. If the ARP cache does not contain an entry for the destination device, the host (the DHCP client) broadcasts an ARP request for that device's address and stores the response in the cache.
+Sending IP packets on a multi-access network requires mapping an IP address to an Ethernet MAC address. **Ethernet LANs use ARP to map MAC addresses to IP addresses**. The switching device maintains this mapping in a cache that it consults when forwarding packets to network devices. If the ARP cache does not contain an entry for the destination device, the host (the DHCP client) broadcasts an ARP request for that device's address and stores the response in the cache.
 
-When we connect to a network, ARP requests are made continuously while communicating on the network. The returned answers are stored in the ARP table. We can see the ARP table of our computer with the ARP command on the terminal.
+When we connect to a network, ARP requests are made continuously while communicating on the network. The returned answers are stored in the **ARP table**. We can see the ARP table of our computer with the ARP command on the terminal.
 
-<p align="center"><img height="350" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp.png"></p>
+<p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp.png"></p>
+
+When we connect to a network, ARP packets are constantly sent to our computer. The reason for this is that computers on the network, including the gateway on the network, are constantly sending packets. It is checked whether the MAC address of the sent packets and our MAC address match. For example, with the **netdiscover** tool, it detects devices on the same network as us and sends ARP request packets to the specified ip range. Respectively, it means who owns this IP address. If an ARP Reply package comes from the other side, this package contains the MAC address. We can listen for these packets with the wireshark tool.
+
+<p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/wireshark.png"></p>
 
 
 ## ARP Poisoning (Spoofing)
