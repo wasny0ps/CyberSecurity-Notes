@@ -190,6 +190,23 @@ The purpose of the ARP poisoning attack is to capture the packet by imitating th
 
 <p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_a.png"></p>
 
+Before starting the poisoning process of the ARP table, we need to activate ip forwarding in order to forward the incoming packets. For IP forwarding to be active, the value of ip_forward must be 1, that is, active. With the command we use, we set the value of 1 in the file.
+
+```shell
+echo 1 > /proc/sys/net/ipv4/ip_forward
+```
+Attacker's IP Address: 192.168.56.102
+
+Target's IP Address: 192.168.56.1
+
+We will use the **ARPSpoof** tool when performing our attack. Its use is shown in the tool's manual note.
+
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arpspoof.png"></p>
+
+We can start the process by poisoning the ARP table of the target system. Our goal is to continuously send ARP reply packets.
+
+
+
 ## Dynamic ARP Inspection
 
 Dynamic ARP Inspection (DAI) is a security feature that **validates Address Resolution Protocol (ARP) packets in a network**. DAI allows a network administrator to intercept, log, and discard ARP packets with invalid MAC address to IP address bindings. This capability **protects the network from certain “man-in-the-middle” and “ARP Poisoning” attacks**.
