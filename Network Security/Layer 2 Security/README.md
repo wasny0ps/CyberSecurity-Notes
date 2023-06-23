@@ -220,4 +220,59 @@ The target of ARP poisoning attacks is actually poisoning the MAC address of the
 
 ## Dynamic ARP Inspection
 
-Dynamic ARP Inspection (DAI) is a security feature that **validates Address Resolution Protocol (ARP) packets in a network**. DAI allows a network administrator to intercept, log, and discard ARP packets with invalid MAC address to IP address bindings. This capability **protects the network from certain “man-in-the-middle” and “ARP Poisoning” attacks**.
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/DAI.gif"></p>
+
+Dynamic ARP Inspection (DAI) is the security mechanism that **prevents malicious ARP attacks by rejecting unknown ARP Packets**. ARP attacks can be done as a Man-in-the-Middle Attack by an attacker. In this type of attack, by capturing the traffic between two hosts, attacker poisons the ARP Cache and sends his/her own MAC address as requested ip address. To prevent from such a maniplation, we should **validate IP-MAC matchings**. Dynamic ARP Inspection does this job and validates IP-MAC matchings.
+
+Dynamic ARP Inspection (DAI) uses **DHCP Snooping binding database that is created by DHCP Snooping by listening DHCP Messages between the nodes**. According to the DHCP Snooping binding database, DAI decides what to do. If there is a record in the database about sender’s IP and MAC address then it accepts the ARP Packet. If there is no record in the database, ARP packet is rejected. Instead of using DHCP Snooping, **static IP-MAC mappings** can be also used for this validation process.
+
+### How does DAI work?
+
+Dynamic ARP Inspection (DAI) uses Trust states for interfaces. There are two trust states for interfaces:
+
+- **Trusted**
+- **Untrusted**
+
+**If an interface set as Trusted, DAI does not work for this interface**. But if it is an Untrusted, DAI precedures work and the MAC-IP matchings are checked. In other words, if we set an interface as trusted, we do not do a validation on these interfaces. In a network all the interfaces connected to the hosts are configured as Untrusted while the interfaces connected to the switches are configured as Trusted. By doing this, ARP Packets are checked if it is coming from a host device. Because, generally such an attacks can come from a host interface.
+
+## Dynamic ARP Inspection Configuration
+
+To configure Dynamic ARP Inspection on switches, we will use the below simple switch topology. As you can see below, there are two switch connected to each other and there are two PCs are connected to each switch.
+
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/DAI_topology.png"></p>
+
+AS we have mentined above, we can use DAI for VLANs. Here, we will configure DAI for VLAN 10 only. The hosts in VLAN 10 will be Untrusted. So, ARP packets coming from these interfaces will be checked for IP-MAC validation. The other interfaces will be configured as trusted interfaces. So, let’s start to configure DAI.
+
+### Enabling Dynamic ARP Inspection
+
+To enable ARP Inspection on VLAN 10, we will use “ip arp inspection vlan 10” command globally on a switch.
+
+```
+Switch A# configure terminal
+Switch A(config)# ip arp inspection vlan 10
+```
+
+To set any interfaces as trusted we will use “ip arp inspection trust” command under that interface. On Switch A, we will set FastEthernet 0/1 and FastEthernet 0/3 as Trusted. The remaining ports will be Untrusted by default.
+
+```
+Switch A(config)# interface fastethernet 0/1
+Switch A(config-if)# ip arp inspection trust
+Switch A(config-if)# exit
+Switch A(config)# interface fastethernet 0/3
+Switch A(config-if)# ip arp inspection trust
+```
+
+Now, let’s do the similar configuration on the other switch, on Switch B.
+
+```
+Switch B# configure terminal
+Switch B(config)# ip arp inspection vlan 10
+```
+
+```
+Switch B(config)# interface fastethernet 0/1
+Switch B(config-if)# ip arp inspection trust
+Switch B(config-if)# exit
+Switch B(config)# interface fastethernet 0/3
+Switch B(config-if)# ip arp inspection trust
+```
