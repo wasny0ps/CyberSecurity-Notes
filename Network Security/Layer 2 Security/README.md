@@ -192,7 +192,7 @@ The purpose of the ARP poisoning attack is to capture the packet by imitating th
 
 Before starting the poisoning process of the ARP table, we need to activate ip forwarding in order to forward the incoming packets. For IP forwarding to be active, the value of ip_forward must be 1, that is, active. With the command we use, we set the value of 1 in the file.
 
-```shell
+```
 echo 1 > /proc/sys/net/ipv4/ip_forward
 ```
 Attacker's IP Address: 192.168.56.102
@@ -205,6 +205,17 @@ We will use the **ARPSpoof** tool when performing our attack. Its use is shown i
 
 We can start the process by poisoning the ARP table of the target system. Our goal is to continuously send ARP reply packets.
 
+```
+sudo arpspoof -i eth0 -t 192.168.56.1 192.168.56.102
+```
+Now, interception will be done by sending ARP Reply packets continuously.
+```
+sudo arpspoof -i eth0 -t 192.168.56.102 192.168.56.1
+```
+
+The target of ARP poisoning attacks is actually poisoning the MAC address of the gateway and seizing the outgoing incoming packets. When we look at the ARP table of the attacked user, we see that the MAC addresses in the table are the same. Our attack was successful.
+
+<p align="center"><img height="300" src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_spoofing.png"></p>
 
 
 ## Dynamic ARP Inspection
