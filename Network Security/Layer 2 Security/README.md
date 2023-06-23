@@ -171,6 +171,15 @@ When we connect to a network, ARP packets are constantly sent to our computer. T
 
 <p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/wireshark.png"></p>
 
+When the content of the sent packet is looked at, it seems that the broadcast is broadcast because the MAC address is not known. This request is forwarded to all addresses within the scanning range.
+
+<p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_packet.png"></p>
+
+If there is a device at the requested address, the device sends its MAC address to the address from which the request is made. In this way, the MAC address of the address is added to the ARP table. In the next request, communication can be provided without sending a broadcast to the network.
+
+<p align="center"><img src="https://github.com/wasny0ps/CyberSecurity-Notes/blob/main/Network%20Security/Layer%202%20Security/src/arp_reply_packet.png"></p>
+
+
 
 ## ARP Poisoning (Spoofing)
 
