@@ -52,6 +52,14 @@ Switch(config-if)#switchport port-security mac-address 0001.97ab.a712
 ```
 # DHCP Security
 
+No authentication mechanism is available between DHCP servers and clients. Therefore, any DHCP server newly deployed on a network can allocate IP addresses and other network parameters to DHCP clients. A bogus DHCP server connects to an aggregation switch through a Layer 2 network. When clients connected to the switches apply for IP addresses through DHCP, the bogus DHCP server responds before other servers and assigns IP addresses to the clients, leading to IP address conflict and affecting network services.
+
+### Security Policy 
+
+To defend against the preceding attack, configure the following security policies on a switch:
+- **DHCP server validity check:** Configure traffic policies to enable the switch to forward reply packets from only valid DHCP servers.
+- **DHCP Snooping:** Configure DHCP snooping and configure valid DHCP server interfaces as trusted interfaces to filter out invalid DHCP servers.
+
 ## DHCP Snooping Prevention
 
 There are two options to prevent a DHCP snooping attack. The first alternative is to make a port security configuration in your switch. And another option is setting the DHCP server's interface as **trust**. Thereby, **our switch identifies only trust DHCP server** and the attacker's server will have useless. Let's configure it!
@@ -276,3 +284,70 @@ Switch B(config-if)# exit
 Switch B(config)# interface fastethernet 0/3
 Switch B(config-if)# ip arp inspection trust
 ```
+
+### DAI Verification
+
+Now, it is time to verification. To verify Dynamic ARP Inspection, we can use the below show commands on switches.
+
+```
+Switch A# show ip arp inspection vlan 10
+
+Source Mac Validation      : Disabled
+
+Destination Mac Validation : Disabled
+
+IP Address Validation      : Disabled
+
+Vlan     Configuration    Operation   ACL Match          Static ACL
+
+—-     ————-    ———   ———          ———-
+
+1     Enabled          Active
+
+Vlan     ACL Logging      DHCP Logging
+
+—-     ———–      ————
+
+1     Deny             Deny
+
+ 
+
+Switch A# show ip arp inspection interfaces fastethernet 0/1
+
+Interface        Trust State     Rate (pps)
+
+—————  ———–     ———-
+
+Fa0/1            Trusted               None
+```
+```
+Switch A# show ip arp inspection interfaces fastethernet 0/2
+
+Interface        Trust State     Rate (pps)
+
+—————  ———–     ———-
+
+Fa0/2            Untrusted               None
+```
+```
+Switch A# show ip arp inspection statistics vlan 10
+
+Vlan      Forwarded        Dropped     DHCP Drops     ACL Drops
+
+—-      ———        ——-     ———-     ———-
+
+1              2              0              0              0
+
+Vlan   DHCP Permits    ACL Permits   Source MAC Failures
+
+—-   ————    ———–   ——————-
+
+1              2              0                    0
+
+Vlan   Dest MAC Failures   IP Validation Failures
+
+—-   —————–   ———————-
+
+1                  0                        0
+```
+**_by wasny0ps_**
